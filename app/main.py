@@ -69,9 +69,25 @@ KNIGHTS = {
     },
 }
 
-def battle(knight1_name: str, knight2_name: str) -> dict:
-    knight1 = Knight(KNIGHTS[knight1_name])
-    knight2 = Knight(KNIGHTS[knight2_name])
-    knight1.take_damage(knight2.power)
-    knight2.take_damage(knight1.power)
-    return {knight1.name: knight1.hp, knight2.name: knight2.hp}
+def battle(knights_config: dict) -> dict:
+    # Create Knight instances for all 4 knights
+    lancelot = Knight(knights_config["lancelot"])
+    mordred = Knight(knights_config["mordred"])
+    arthur = Knight(knights_config["arthur"])
+    red_knight = Knight(knights_config["red_knight"])
+    
+    # Battle 1: Lancelot vs Mordred
+    lancelot.take_damage(mordred.power)
+    mordred.take_damage(lancelot.power)
+    
+    # Battle 2: Arthur vs Red Knight
+    arthur.take_damage(red_knight.power)
+    red_knight.take_damage(arthur.power)
+    
+    # Return all results
+    return {
+        lancelot.name: lancelot.hp,
+        arthur.name: arthur.hp,
+        mordred.name: mordred.hp,
+        red_knight.name: red_knight.hp,
+    }
